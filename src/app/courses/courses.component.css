@@ -1,0 +1,24 @@
+app-edit-user{
+    display: flex;
+    flex: 1 1 auto;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+}
+div.user-details-section{
+   padding-right: 8px;
+}
+
+div.user-detail-section,div.course-table-section{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex: 1 1 auto;
+}
+
+/* course-table-section{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex: 1 1 auto;
+}     */

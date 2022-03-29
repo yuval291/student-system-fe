@@ -1,0 +1,10 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <form>
+            <input type="text" id="userId" class="fadeIn second" [(ngModel)]="student.userId" name="userId" placeholder="userId">
+            <input type="password" id="password" class="fadeIn third" [(ngModel)]="student.password" name="password" placeholder="password">
+            <input type="submit" (click)="studentLogin()" class="fadeIn fourth" value="Log In" [routerLink]="loginSuccess ? ['/home'] : ['']" >
+        </form>
+    </div>
+</div>
+

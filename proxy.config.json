@@ -1,0 +1,9 @@
+{
+    "/student/*": {
+        "target": "http://localhost:8080",
+        "secure": true,
+        "logLevel": "info",
+        "pathRewrite": { "^/student": "" }
+    },
+    "changeOrigin": true
+}

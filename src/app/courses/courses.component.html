@@ -1,0 +1,15 @@
+<app-navbar></app-navbar>
+<div class="user-details-section">
+    <div *ngIf="!editMode">
+        <label *ngIf="student">User Id : {{student.userId}}</label>
+        <label *ngIf="student">First Name : {{student.first_name}}</label>
+        <label *ngIf="student">Last Name : {{student.last_name}}</label>
+        <label *ngIf="student">Email : {{student.email}}</label>
+        <label *ngIf="student">Password : {{student.password}}</label>
+        <button mat-raised-button color="accent" (click)="toggleEditMode()">Edit</button>
+    </div>
+    <app-edit-user *ngIf="editMode"></app-edit-user>
+</div>
+<div class="course-table-section">
+
+</div>
