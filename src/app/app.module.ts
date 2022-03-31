@@ -10,8 +10,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRotingModule , routingComponent} from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
-import { LogoutComponent } from './logout/logout.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { CourseTableComponent } from './course-table/course-table.component';
+import { AgGridModule } from 'ag-grid-angular';  
+
 
 
 @NgModule({
@@ -19,8 +21,8 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     AppComponent,
     routingComponent,
     NavbarComponent,
-    LogoutComponent,
-    EditUserComponent
+    EditUserComponent,
+    CourseTableComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,8 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    AgGridModule
   ],
   providers: [],
   bootstrap: [AppComponent]

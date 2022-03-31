@@ -1,32 +1,33 @@
 <div class="container">
     <h2>Edit Your Details</h2>
-    <form action="#">
+    <form action="#" #f="ngForm" (ngSubmit)="onSave(f)">
         <div class="user-details">
             <div class="left-section">
                 <div class="input-box">
                     <span class="detail-name">First Name</span>
-                    <input class="detail-value" type="text" placeholder="Enter your first name" >
-                </div>
+                    <input type="text" [ngModel]="userData.firstName" name="firstName" class="detail-value"placeholder="Enter your first name" >
+                </div>  
                 <div class="input-box">
                     <span class="detail-name">Last Name</span>
-                    <input class="detail-value" type="text" placeholder="Enter your last name" >
+                    <input type="text" [ngModel]="userData.lastName" name="lastName" class="detail-value" placeholder="Enter your last name" >
                 </div>
                 <div class="input-box">
                     <span class="detail-name">Email</span>
-                    <input class="detail-value" type="text" placeholder="Enter your email" >
+                    <input type="email" [ngModel]="userData.email" name="email" class="detail-value" placeholder="Enter your email" >
                 </div>
             </div>
             <div class="right-section">
                 <div class="input-box">
                     <span class="detail-name">Id</span>
-                    <input class="detail-value" type="text" placeholder="Enter your ID number" >
+                    <input type="text" [ngModel]="userData.id" name="id" class="detail-value" placeholder="Enter your ID number" >
                 </div>
                 <div class="input-box">
                     <span class="detail-name">Password</span>
-                    <input class="detail-value" type="text" placeholder="Enter your password" >
+                    <input type="password" [ngModel]="userData.password" name="password" class="detail-value" placeholder="Enter your password" >
                 </div>
                 <div class="button">
-                    <input type="submit" value="Edit">
+                    <button mat-raised-button color="accent" type="submit">Save</button>
+                    <button mat-raised-button color="accent" type="button" (click)="onCancel()" >Cancel</button>
                 </div>
             </div>
         </div>

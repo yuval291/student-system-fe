@@ -29,7 +29,7 @@ div.input-box{
     border: 0px solid;
     height: 20px;
     width: 160px;
-    color: #CCC;
+    color:thistle;
 }
 
 .detail-value:focus {

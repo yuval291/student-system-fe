@@ -7,6 +7,8 @@ app-edit-user{
 }
 div.user-details-section{
    padding-right: 8px;
+   flex: 2;
+   padding-bottom: 15px;
 }
 
 div.user-detail-section,div.course-table-section{
@@ -16,9 +18,52 @@ div.user-detail-section,div.course-table-section{
     flex: 1 1 auto;
 }
 
-/* course-table-section{
+.course-table-section{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex: none;
+}  
+
+.data-grid{
     display: flex;
     height: 100%;
     width: 100%;
     flex: 1 1 auto;
-}     */
+}
+
+.user-details-section{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+label{
+    padding: 8px;
+}
+
+.user-details-div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.user-details{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.left-section ,.right-section{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+}
+
+.button{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}

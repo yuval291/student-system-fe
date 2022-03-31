@@ -1,3 +1,7 @@
+
+@import "~ag-grid-community/dist/styles/ag-grid.css";
+@import "~ag-grid-community/dist/styles/ag-theme-balham.css";
+
 body , html{
     width: 100%;
     height: 100%;
@@ -11,3 +15,4 @@ app-root ,app-courses{
     flex-direction: column;
     flex: 1 1 0;
 }
+

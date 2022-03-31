@@ -29,8 +29,13 @@ export class CoursesComponent implements OnInit {
     });
   }
 
-  toggleEditMode(){
-    //this.router.navigate(['edit',this.studentId]);
+  toggleEditMode(){                   
     this.editMode=!this.editMode
   }
+
+  receiveMessageEdit($event){
+    this.editMode = $event;
+  }
+
+  
 }
