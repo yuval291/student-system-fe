@@ -1,33 +1,82 @@
 <div class="container">
-    <h2>Edit Your Details</h2>
-    <form action="#" #f="ngForm" (ngSubmit)="onSave(f)">
-        <div class="user-details">
+    <h2>ערוך את הפרטים האישיים שלך</h2>
+    <form #f="ngForm" (ngSubmit)="onSave(f)">
+        <div class="user-details" >
             <div class="left-section">
-                <div class="input-box">
-                    <span class="detail-name">First Name</span>
-                    <input type="text" [ngModel]="userData.firstName" name="firstName" class="detail-value"placeholder="Enter your first name" >
+                <div class="input-box form-group">
+                    <span class="detail-name">שם פרטי</span>
+                    <input 
+                        type="text" 
+                        [ngModel]="userData.firstName" 
+                        name="firstName" 
+                        class="detail-value"
+                        placeholder="הכנס את שמך הפרטי" 
+                        required
+                        [pattern]="'^[א-ת\s]+$'"
+                        minlength="5"
+                    >
                 </div>  
-                <div class="input-box">
-                    <span class="detail-name">Last Name</span>
-                    <input type="text" [ngModel]="userData.lastName" name="lastName" class="detail-value" placeholder="Enter your last name" >
+                <div class="input-box form-group">
+                    <span class="detail-name">שם משפחה</span>
+                    <input 
+                    type="text" 
+                    [ngModel]="userData.lastName" 
+                    name="lastName" 
+                    class="detail-value" 
+                    placeholder="Enter your last name" 
+                    required
+                    [pattern]="'^[א-ת\s]+$'"
+                    minlength="5"
+                >
                 </div>
                 <div class="input-box">
-                    <span class="detail-name">Email</span>
-                    <input type="email" [ngModel]="userData.email" name="email" class="detail-value" placeholder="Enter your email" >
+                    <span class="detail-name">דוא"ל</span>
+                    <input 
+                        type="email" 
+                        [ngModel]="userData.email" 
+                        name="email" 
+                        class="detail-value" 
+                        placeholder="Enter your email" 
+                        required
+                        email
+                    >
                 </div>
             </div>
             <div class="right-section">
                 <div class="input-box">
-                    <span class="detail-name">Id</span>
-                    <input type="text" [ngModel]="userData.id" name="id" class="detail-value" placeholder="Enter your ID number" >
+                    <span class="detail-name">תעודת זהות</span>
+                    <input 
+                        type="text" 
+                        [ngModel]="userData.id" 
+                        name="id" 
+                        class="detail-value" 
+                        placeholder="Enter your ID number"
+                        required 
+                        [disabled]="true"
+                    >
                 </div>
                 <div class="input-box">
-                    <span class="detail-name">Password</span>
-                    <input type="password" [ngModel]="userData.password" name="password" class="detail-value" placeholder="Enter your password" >
+                    <span class="detail-name">סיסמא</span>
+                    <input 
+                        type="password" 
+                        [ngModel]="userData.password" 
+                        name="password" 
+                        class="detail-value" 
+                        placeholder="Enter your password"
+                        required 
+                        [pattern]="passwordPth" 
+                    >
                 </div>
                 <div class="button">
-                    <button mat-raised-button color="accent" type="submit">Save</button>
-                    <button mat-raised-button color="accent" type="button" (click)="onCancel()" >Cancel</button>
+                    <button 
+                        mat-raised-button color="accent" 
+                        type="submit" 
+                        [disabled]="!f.valid">Save</button>
+                    <button 
+                        mat-raised-button 
+                        color="accent" 
+                        type="button" 
+                        (click)="onCancel()" >Cancel</button>
                 </div>
             </div>
         </div>

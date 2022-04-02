@@ -35,3 +35,8 @@ div.input-box{
 .detail-value:focus {
     outline: none; 
 }
+
+
+input.ng-invalid.ng-touched{
+    border: 1px solid red;
+}

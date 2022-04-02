@@ -11,10 +11,15 @@ import { Student } from '../studentUser';
 export class NavbarComponent implements OnInit {
   studentId: string;
   
-  constructor(private route:ActivatedRoute) { }
+  constructor(private route:ActivatedRoute , private router: Router) { }
 
   ngOnInit(): void {
     //Takes the userId from what URL
     this.studentId = this.route.snapshot.paramMap.get('id');
+  }
+
+  onLogout(){
+    alert("Bye Bye")
+    this.router.navigate(['']);
   }
 }

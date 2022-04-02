@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
 import { UserService } from '../service/UserService';
-import { Student } from '../studentUser';
+import { ButtonRendererComponent } from './ButtonRendererComponent.component';
 
 @Component({
   selector: 'app-course-table',
@@ -12,41 +12,54 @@ import { Student } from '../studentUser';
 })
 export class CourseTableComponent implements OnInit {
   private gridApi!: GridApi;
-
   @ViewChild("agGrid", {static:false}) agGrid: AgGridAngular;
+  frameworkComponents: any;
   rowData : any;
+  columnDefs : any;
   studentId: String;
-
-  columnDefs = [
-    {headerName: "Grade" , field: "grade" , sortable: true , filter:true },
-    {headerName: "Course Name" , field: "courseName", sortable: true, filter:true},
-    {headerName: "id" , field: "id", sortable: true, filter:true},
-    {headerName: "Start Date" , field: "startDate", sortable: true, filter:true},
-    {headerName: "End Date" , field: "endDate", sortable: true, filter:true}
-  ];
   
 
-  constructor(private userService:UserService ,private route:ActivatedRoute) { }
+  constructor(private userService:UserService ,private route:ActivatedRoute) {
+    this.frameworkComponents = {
+      buttonRenderer: ButtonRendererComponent,
+    }
+   }
 
   ngOnInit(): void {
   }
 
-  // getSelectedRows(){
-  //   const selectedNodes = this.agGrid.api.getSelectedNodes();
-  //   const selectedData = selectedNodes.map(node => node.data);
-  //   const selectedDataStringPresentation = selectedData.map(node => node.make + ' ' + node.model).join(",");
-  //   alert(`Selected Nodes: ${selectedDataStringPresentation}`)
-  // }
-
   onGridReady(params: GridReadyEvent) {
+    this.columnDefs = this.initColumn();
+
     this.gridApi = params.api;
     params.api.sizeColumnsToFit();
 
     this.studentId = this.route.snapshot.paramMap.get('id');
     this.userService.getUserCourses(this.studentId).subscribe((data)=>{
-      console.log("data"+data)
       this.rowData=data;
     })
+  }
+
+  initColumn(){
+    return [
+      {headerName: "Grade" , field: "grade" , sortable: true , filter:true },
+      {headerName: "Course Name" , field: "courseName", sortable: true, filter:true},
+      {headerName: "Course Number" , field: "id", sortable: true, filter:true},
+      {headerName: "Start Date" , field: "startDate", sortable: true, filter:true},
+      {headerName: "End Date" , field: "endDate", sortable: true, filter:true},
+      {headerName: "Delete" , cellRenderer: 'buttonRenderer',
+      cellRendererParams: {
+      onClick: this.onDeleteCourse.bind(this),
+      label: 'Delete'}}
+    ];
+  }
+
+  onDeleteCourse(params){
+    this.studentId = this.route.snapshot.paramMap.get('id');
+
+    this.userService.onDeleteCourse(params.data,this.studentId).subscribe((data)=>{});
+    this.gridApi.updateRowData({remove: [params.data]});
+    alert("נמחק בהצלחה")
   }
 
 }

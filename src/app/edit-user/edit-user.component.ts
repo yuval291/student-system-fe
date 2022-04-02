@@ -1,5 +1,5 @@
 import { Component, Input, OnInit , Output , EventEmitter } from '@angular/core';
-import { NgForm  } from '@angular/forms';
+import { NgForm, Validators  } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../service/UserService';
 import { Student } from '../studentUser';
@@ -15,6 +15,7 @@ export class EditUserComponent implements OnInit {
   cancel : boolean = false; 
   editMode : boolean = false;
   @Output() event= new EventEmitter<boolean>();
+  passwordPth = '^(?=.*\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$^+=])(.{8,15})$';
 
   userData={
     firstName: "",
@@ -37,15 +38,15 @@ export class EditUserComponent implements OnInit {
   }
 
   onSave(form: NgForm){
-    console.log(this.student)
     this.editStudent.first_name= form.value.firstName;
     this.editStudent.last_name= form.value.lastName;
     this.editStudent.email= form.value.email;
-    this.editStudent.userId = form.value.id;
+    this.editStudent.userId = this.student.userId;
     this.editStudent.password = form.value.password;
      
     this.userService.saveEdit(this.editStudent).subscribe((data) => {
-      console.log("data"+data);
+      alert("Edited successfully");
+      console.log(data)
     });
   }
 
