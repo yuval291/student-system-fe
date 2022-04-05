@@ -15,7 +15,6 @@ export class EditUserComponent implements OnInit {
   cancel : boolean = false; 
   editMode : boolean = false;
   @Output() event= new EventEmitter<boolean>();
-  passwordPth = '^(?=.*\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$^+=])(.{8,15})$';
 
   userData={
     firstName: "",
@@ -46,7 +45,6 @@ export class EditUserComponent implements OnInit {
      
     this.userService.saveEdit(this.editStudent).subscribe((data) => {
       alert("Edited successfully");
-      console.log(data)
     });
   }
 

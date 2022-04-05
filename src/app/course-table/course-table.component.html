@@ -8,7 +8,9 @@
     class="ag-theme-balham"
     [rowData]="rowData"
     [columnDefs]="columnDefs"
+    enableColResize= true
     rowSelection="multiple"
     (gridReady)="onGridReady($event)"
-    [frameworkComponents]="frameworkComponents" 
+    [frameworkComponents]="frameworkComponents"
+    suppressRowClickSelection= true 
 ></ag-grid-angular>

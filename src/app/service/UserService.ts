@@ -10,28 +10,25 @@ import { DatePipe } from "@angular/common";
 })
 export class UserService{
 
-    private baseUrl = "http://localhost:8080/student/getDetail"
-    private editUrl = "http://localhost:8080/student/saveEdit"
-    private courseUrl = "http://localhost:8080/student/getCourses"
-    private deleteCourseUrl = "http://localhost:8080/student/deleteCourse"
+    private baseUrl = "http://localhost:8080/student"
     date=new Date();
 
     constructor(private http: HttpClient , public datepipe: DatePipe){}
     
     getDetail(userId:string):Observable<object> {
-        return this.http.post(`${this.baseUrl}` , userId,{headers:{
+        return this.http.post(`${this.baseUrl+"/getDetail   "}` , userId,{headers:{
             'Access-Control-Allow-Origin': '*'
         } } );
       }
 
     saveEdit(student:Student):Observable<object>{
-        return this.http.post(`${this.editUrl}`, student,{headers:{
+        return this.http.post(`${this.baseUrl+"/saveEdit"}`, student,{headers:{
             'Access-Control-Allow-Origin': '*'
         }});
     }
 
     getUserCourses(userId:String):Observable<object>{
-        return this.http.post(`${this.courseUrl}`, userId,{headers:{
+        return this.http.post(`${this.baseUrl+"/getCourses"}`, userId,{headers:{
             'Access-Control-Allow-Origin': '*'
         }});
     }
@@ -41,11 +38,10 @@ export class UserService{
         let courseId = params.id;
         // If the course has already started
         if(currentDate>params.startDate){
-               alert("The course has already started and can not be canceled")
-               return null;
+               throw "The course has already started and can not be canceled"
         }
          
-        return this.http.post(`${this.deleteCourseUrl}`, {courseId,userId},{headers:{
+        return this.http.post(`${this.baseUrl+"/deleteCourse"}`, {courseId,userId},{headers:{
             'Access-Control-Allow-Origin': '*'
         }}); 
     }

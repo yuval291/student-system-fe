@@ -16,3 +16,7 @@ app-root ,app-courses{
     flex: 1 1 0;
 }
 
+app-login{
+    align-self: center;
+}
+

@@ -40,3 +40,7 @@ div.input-box{
 input.ng-invalid.ng-touched{
     border: 1px solid red;
 }
+
+.alert{
+    color: red;
+}

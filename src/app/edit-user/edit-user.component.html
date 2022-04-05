@@ -3,48 +3,7 @@
     <form #f="ngForm" (ngSubmit)="onSave(f)">
         <div class="user-details" >
             <div class="left-section">
-                <div class="input-box form-group">
-                    <span class="detail-name">שם פרטי</span>
-                    <input 
-                        type="text" 
-                        [ngModel]="userData.firstName" 
-                        name="firstName" 
-                        class="detail-value"
-                        placeholder="הכנס את שמך הפרטי" 
-                        required
-                        [pattern]="'^[א-ת\s]+$'"
-                        minlength="5"
-                    >
-                </div>  
-                <div class="input-box form-group">
-                    <span class="detail-name">שם משפחה</span>
-                    <input 
-                    type="text" 
-                    [ngModel]="userData.lastName" 
-                    name="lastName" 
-                    class="detail-value" 
-                    placeholder="Enter your last name" 
-                    required
-                    [pattern]="'^[א-ת\s]+$'"
-                    minlength="5"
-                >
-                </div>
                 <div class="input-box">
-                    <span class="detail-name">דוא"ל</span>
-                    <input 
-                        type="email" 
-                        [ngModel]="userData.email" 
-                        name="email" 
-                        class="detail-value" 
-                        placeholder="Enter your email" 
-                        required
-                        email
-                    >
-                </div>
-            </div>
-            <div class="right-section">
-                <div class="input-box">
-                    <span class="detail-name">תעודת זהות</span>
                     <input 
                         type="text" 
                         [ngModel]="userData.id" 
@@ -54,9 +13,9 @@
                         required 
                         [disabled]="true"
                     >
+                    <span class="detail-name">תעודת זהות</span>
                 </div>
                 <div class="input-box">
-                    <span class="detail-name">סיסמא</span>
                     <input 
                         type="password" 
                         [ngModel]="userData.password" 
@@ -64,8 +23,19 @@
                         class="detail-value" 
                         placeholder="Enter your password"
                         required 
-                        [pattern]="passwordPth" 
+                        pattern="^(?=.*\d)(?=.*[A-Za-z])(?!.*[^a-zA-Z0-9@#$^+=])(.{5,})$" 
+                        #password="ngModel"
                     >
+                    <span class="detail-name">סיסמא</span>
+
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
+                        <div *ngIf="password.errors?.['required']">
+                            Password is required.
+                        </div>
+                        <div *ngIf="password.errors?.['pattern']">
+                            Over 5 digits and a combination of letters and numbers
+                        </div>
+                    </div>
                 </div>
                 <div class="button">
                     <button 
@@ -77,6 +47,79 @@
                         color="accent" 
                         type="button" 
                         (click)="onCancel()" >Cancel</button>
+                </div>
+            </div>
+            <div class="right-section">
+                <div class="input-box form-group">
+                    <input 
+                        type="text" 
+                        [ngModel]="userData.firstName" 
+                        name="firstName" 
+                        class="detail-value"
+                        placeholder="First name in Hebrew only" 
+                        required
+                        [pattern]="'^[א-ת\s]+$'"
+                        minlength="5"
+                        #firstName="ngModel"
+                    >
+                    <span class="detail-name">שם פרטי</span>
+                    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert">
+                        <div *ngIf="firstName.errors?.['required']">
+                            FirstName is required.
+                        </div>
+                        <div *ngIf="firstName.errors?.['minlength']">
+                            First name must be over 5 characters
+                        </div>
+                        <div *ngIf="firstName.errors?.['pattern']">
+                            First name in Hebrew only
+                        </div>
+                    </div>
+                </div>  
+                <div class="input-box form-group">
+                    <input 
+                    type="text" 
+                    [ngModel]="userData.lastName" 
+                    name="lastName" 
+                    class="detail-value" 
+                    placeholder="Enter your last name" 
+                    required
+                    [pattern]="'^[א-ת\s]+$'"
+                    minlength="5"
+                    #lastName="ngModel"
+                >
+                <span class="detail-name">שם משפחה</span>
+                    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert">
+                        <div *ngIf="lastName.errors?.['required']">
+                            LastName is required.
+                        </div>
+                        <div *ngIf="lastName.errors?.['minlength']">
+                            LastName must be over 5 characters
+                        </div>
+                        <div *ngIf="lastName.errors?.['pattern']">
+                            LastName name in Hebrew only
+                        </div>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <input 
+                        type="email" 
+                        [ngModel]="userData.email" 
+                        name="email" 
+                        class="detail-value" 
+                        placeholder="Enter your email" 
+                        required
+                        email
+                        #email="ngModel"
+                    >
+                    <span class="detail-name">דוא"ל</span>
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
+                        <div *ngIf="email.errors?.['required']">
+                            Email is required.
+                        </div>
+                        <div *ngIf="email.errors?.['email']">
+                            Invalid email
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

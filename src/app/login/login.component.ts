@@ -1,5 +1,6 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {AuthService} from '../service/AuthService';
 import { Student } from '../studentUser';
@@ -10,7 +11,6 @@ import { Student } from '../studentUser';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  @Input()
   student: Student = new Student();
   loginSuccess = false;
 
@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+   
   }
 
   studentLogin(){
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['home',dataStudent.userId]);
       alert("Login Successfully")
     },error => {
-      alert("Sorry Please enter correct Username ans Password")
+      alert("Sorry Please enter correct Username and Password")
     });
   }
   

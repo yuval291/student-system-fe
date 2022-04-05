@@ -20,6 +20,6 @@ export class NavbarComponent implements OnInit {
 
   onLogout(){
     alert("Bye Bye")
-    this.router.navigate(['']);
+    this.router.navigate(['login']);
   }
 }

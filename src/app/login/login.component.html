@@ -1,10 +1,67 @@
-<div class="wrapper fadeInDown">
-    <div id="formContent">
-        <form>
-            <input type="text" id="userId" class="fadeIn second" [(ngModel)]="student.userId" name="userId" placeholder="userId">
-            <input type="password" id="password" class="fadeIn third" [(ngModel)]="student.password" name="password" placeholder="password">
-            <input type="submit" (click)="studentLogin()" class="fadeIn fourth" value="Log In" [routerLink]="loginSuccess ? ['/home'] : ['']" >
-        </form>
-    </div>
+
+<div>
+    <h2>Modal Login Form</h2>
+</div>
+
+<div class="model-login">
+    <!-- Button to open the modal login form -->
+    <button onclick="document.getElementById('id01').style.display='block'">Login</button>
+</div>
+
+<!-- The Modal -->
+<div id="id01" class="modal">
+    <form #loginForm="ngForm" class="modal-content animate" action="/action_page.php">
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('id01').style.display='none'"
+            class="close" title="Close Modal">&times;</span>
+            <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar">
+        </div>
+
+        <div class="container">
+            <label for="uid"><b>UserID</b></label>
+            <input 
+                type="text" 
+                id="userId" 
+                name="userId" 
+                class="form-control" 
+                [(ngModel)]="student.userId" 
+                placeholder="Enter UserId"
+                required
+                minlength="9"
+                #userId="ngModel"
+            >
+            <small id="idHelp" class="form-text text-muted">We'll never share your id with anyone else.</small>
+            <br>
+            <div *ngIf="userId.invalid && (userId.dirty || userId.touched)" class="alert">
+                <div *ngIf="userId.errors?.['required']">
+                  Name is required.
+                </div>
+                <div *ngIf="userId.errors?.['minlength']">
+                  Id must be at least 9 number long.
+                </div>
+            </div>
+            
+            <br>
+            <label for="psw"><b>Password</b></label>
+            <input 
+                type="password" 
+                id="password" 
+                class="form-control" 
+                [(ngModel)]="student.password" 
+                name="password" 
+                placeholder="password"
+                required
+                #password="ngModel"
+            >
+            <br>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
+                <div *ngIf="password.errors?.['required']">
+                    Password is required.
+                </div>
+            </div>
+            
+            <button type="submit" (click)="studentLogin()" [disabled]="!loginForm.valid" [routerLink]="loginSuccess ? ['/home'] : ['/login']" >Log In</button>
+        </div>
+    </form> 
 </div>
 

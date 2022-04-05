@@ -11,6 +11,7 @@ import { ButtonRendererComponent } from './ButtonRendererComponent.component';
   styleUrls: ['./course-table.component.css']
 })
 export class CourseTableComponent implements OnInit {
+
   private gridApi!: GridApi;
   @ViewChild("agGrid", {static:false}) agGrid: AgGridAngular;
   frameworkComponents: any;
@@ -32,7 +33,8 @@ export class CourseTableComponent implements OnInit {
     this.columnDefs = this.initColumn();
 
     this.gridApi = params.api;
-    params.api.sizeColumnsToFit();
+    params.api.sizeColumnsToFit();  
+    
 
     this.studentId = this.route.snapshot.paramMap.get('id');
     this.userService.getUserCourses(this.studentId).subscribe((data)=>{
@@ -42,24 +44,29 @@ export class CourseTableComponent implements OnInit {
 
   initColumn(){
     return [
-      {headerName: "Grade" , field: "grade" , sortable: true , filter:true },
-      {headerName: "Course Name" , field: "courseName", sortable: true, filter:true},
-      {headerName: "Course Number" , field: "id", sortable: true, filter:true},
-      {headerName: "Start Date" , field: "startDate", sortable: true, filter:true},
-      {headerName: "End Date" , field: "endDate", sortable: true, filter:true},
+      {headerName: "Grade" , field: "grade" , sortable: true , filter:true ,maxWidth:450,minWidth:320},
+      {headerName: "Course Name" , field: "courseName", sortable: true, filter:true,maxWidth:450,minWidth:320},
+      {headerName: "Course Number" , field: "id", sortable: true, filter:true,maxWidth:450,minWidth:320},
+      {headerName: "Start Date" , field: "startDate", sortable: true, filter:true,maxWidth:450,minWidth:320},
+      {headerName: "End Date" , field: "endDate", sortable: true, filter:true,maxWidth:450,minWidth:320},
       {headerName: "Delete" , cellRenderer: 'buttonRenderer',
       cellRendererParams: {
       onClick: this.onDeleteCourse.bind(this),
-      label: 'Delete'}}
+      label: 'Delete'},width: 90, minWidth: 50, maxWidth: 100}
     ];
   }
 
   onDeleteCourse(params){
     this.studentId = this.route.snapshot.paramMap.get('id');
+    try{
+      this.userService.onDeleteCourse(params.data,this.studentId).subscribe((data)=>{
+    });
 
-    this.userService.onDeleteCourse(params.data,this.studentId).subscribe((data)=>{});
     this.gridApi.updateRowData({remove: [params.data]});
-    alert("נמחק בהצלחה")
+    alert(" Deleted successfully")
+    } catch(e){
+      alert(e)
+    } 
   }
 
 }

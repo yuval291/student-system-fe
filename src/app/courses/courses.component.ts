@@ -20,7 +20,6 @@ export class CoursesComponent implements OnInit {
     //Takes the userId from what URL
     this.studentId = this.route.snapshot.paramMap.get('id');
     this.getDetail(this.studentId)
-    console.log(this.student)
   }
 
   getDetail(userId: string){
